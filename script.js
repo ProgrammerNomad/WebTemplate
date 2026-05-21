@@ -192,27 +192,6 @@ const counterObs = new IntersectionObserver((entries) => {
 const heroStats = document.querySelector(".hero-stats");
 if (heroStats) counterObs.observe(heroStats);
 
-/* ─── Portfolio Filter ─────────────────────────── */
-const filterBtns = document.querySelectorAll(".filter-btn");
-const workCards  = document.querySelectorAll(".work-card");
-
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterBtns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const filter = btn.dataset.filter;
-    workCards.forEach(card => {
-      if (filter === "all" || card.dataset.category === filter) {
-        card.style.display = "";
-        card.classList.remove("filtered");
-      } else {
-        card.classList.add("filtered");
-        card.style.display = "none";
-      }
-    });
-  });
-});
-
 /* ─── Testimonial Slider ───────────────────────── */
 (function initSlider() {
   const slider = document.getElementById("testi-slider");
