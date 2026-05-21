@@ -256,20 +256,41 @@ if (heroStats) counterObs.observe(heroStats);
     const form    = document.getElementById(formId);
     const success = document.getElementById(successId);
     if (!form) return;
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn     = form.querySelector(".submit-btn");
       const btnText = btn.querySelector(".btn-text");
       const btnLoad = btn.querySelector(".btn-loading");
+
       btnText.style.display = "none";
       btnLoad.style.display = "inline";
       btn.disabled = true;
-      await new Promise(r => setTimeout(r, 1600));
-      btn.style.display = "none";
-      if (success) success.style.display = "block";
-      form.reset();
+
+      try {
+        const res  = await fetch("send_mail.php", {
+          method : "POST",
+          body   : new FormData(form),
+        });
+        const data = await res.json();
+
+        if (data.ok) {
+          btn.style.display = "none";
+          if (success) success.style.display = "block";
+          form.reset();
+        } else {
+          throw new Error(data.error || "Send failed.");
+        }
+      } catch (err) {
+        btnText.textContent  = "Failed — try again";
+        btnText.style.display = "inline";
+        btnLoad.style.display = "none";
+        btn.disabled = false;
+        console.error("Mail error:", err.message);
+      }
     });
   }
+
   bindForm("hero-contact-form", "hero-form-success");
   bindForm("contact-form",      "form-success");
 })();

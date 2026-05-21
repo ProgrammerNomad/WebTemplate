@@ -1,0 +1,9 @@
+{
+  "name": "nexacode/website",
+  "require": {
+    "phpmailer/phpmailer": "^6.9"
+  },
+  "config": {
+    "vendor-dir": "vendor"
+  }
+}
