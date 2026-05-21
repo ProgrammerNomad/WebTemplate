@@ -1,0 +1,11 @@
+/* ==========================================
+   WORK CARD BACKGROUND OVERLAY (renders the
+   gradient colour set via --bg inline style)
+========================================== */
+.work-card-img::before {
+  background: var(--bg) !important;
+  z-index: 0 !important;
+}
+.work-card-img {
+  background-image: var(--bg) !important;
+}

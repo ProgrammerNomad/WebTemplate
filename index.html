@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaCode - Web Development Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="overrides.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       CANVAS BACKGROUND (particles)
+  ═══════════════════════════════════════ -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ═══════════════════════════════════════
+       CURSOR
+  ═══════════════════════════════════════ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">NexaCode</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home"   class="nav-link active" data-section="home">Home</a></li>
+        <li><a href="#about"  class="nav-link"         data-section="about">About</a></li>
+        <li><a href="#services" class="nav-link"       data-section="services">Services</a></li>
+        <li><a href="#work"   class="nav-link"         data-section="work">Work</a></li>
+        <li><a href="#testimonials" class="nav-link"   data-section="testimonials">Reviews</a></li>
+        <li><a href="#contact" class="nav-link"        data-section="contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn-nav">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-progress" id="nav-progress"></div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge reveal-up">
+        <span class="badge-dot"></span>
+        Available for new projects
+      </div>
+      <h1 class="hero-title reveal-up">
+        We Build<br />
+        <span class="gradient-text">Digital</span><br />
+        <span class="outline-text">Experiences</span>
+      </h1>
+      <p class="hero-desc reveal-up">
+        Award-winning web development studio crafting high-performance websites,
+        apps, and digital products that drive real business growth.
+      </p>
+      <div class="hero-cta reveal-up">
+        <a href="#work" class="btn-primary">
+          <span>View Our Work</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#about" class="btn-ghost">Learn More</a>
+      </div>
+      <div class="hero-stats reveal-up">
+        <div class="stat">
+          <span class="stat-num" data-count="150">0</span><span>+</span>
+          <span class="stat-label">Projects Done</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="12">0</span><span>+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="98">0</span><span>%</span>
+          <span class="stat-label">Client Satisfaction</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal-right">
+      <div class="hero-form-wrap">
+        <div class="hero-form-header">
+          <span class="badge-dot"></span>
+          <span>Get a free project estimate</span>
+        </div>
+        <h3 class="hero-form-title">Start Your Project</h3>
+        <form class="contact-form" id="hero-contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="h-name">Your Name</label>
+              <input type="text" id="h-name" name="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="h-email">Email Address</label>
+              <input type="email" id="h-email" name="email" placeholder="john@company.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="h-service">Service Needed</label>
+            <select id="h-service" name="service">
+              <option value="">Select a service…</option>
+              <option>Web Development</option>
+              <option>Mobile App</option>
+              <option>UI/UX Design</option>
+              <option>AI Integration</option>
+              <option>Cloud & DevOps</option>
+              <option>E-Commerce</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="h-message">Tell Us About Your Project</label>
+            <textarea id="h-message" name="message" rows="3" placeholder="Describe your project, goals, timeline…" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full submit-btn">
+            <span class="btn-text">Send Message</span>
+            <span class="btn-loading" style="display:none">Sending…</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+          <div class="form-success" id="hero-form-success" style="display:none">
+            ✅ Message sent! We'll reply within 24 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MARQUEE / TECH BAND
+  ═══════════════════════════════════════ -->
+  <div class="marquee-band">
+    <div class="marquee-track" id="marquee-track">
+      <span>React</span><span class="dot">◆</span>
+      <span>Next.js</span><span class="dot">◆</span>
+      <span>Vue.js</span><span class="dot">◆</span>
+      <span>Node.js</span><span class="dot">◆</span>
+      <span>TypeScript</span><span class="dot">◆</span>
+      <span>MongoDB</span><span class="dot">◆</span>
+      <span>PostgreSQL</span><span class="dot">◆</span>
+      <span>AWS</span><span class="dot">◆</span>
+      <span>Docker</span><span class="dot">◆</span>
+      <span>GraphQL</span><span class="dot">◆</span>
+      <span>Figma</span><span class="dot">◆</span>
+      <span>TailwindCSS</span><span class="dot">◆</span>
+      <span>Redis</span><span class="dot">◆</span>
+      <span>Kubernetes</span><span class="dot">◆</span>
+      <span>Flutter</span><span class="dot">◆</span>
+      <span>Python</span><span class="dot">◆</span>
+      <span>Laravel</span><span class="dot">◆</span>
+      <span>Stripe</span><span class="dot">◆</span>
+      <span>Supabase</span><span class="dot">◆</span>
+      <span>Vercel</span><span class="dot">◆</span>
+      <span>OpenAI</span><span class="dot">◆</span>
+      <span>Prisma</span><span class="dot">◆</span>
+      <span>Svelte</span><span class="dot">◆</span>
+      <span>Shopify</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       ABOUT SECTION
+  ═══════════════════════════════════════ -->
+  <section class="about section-pad" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal-left">
+          <div class="about-img-wrap">
+            <div class="about-img-bg"></div>
+            <div class="about-img-card">
+              <div class="team-faces">
+                <div class="face f1"></div>
+                <div class="face f2"></div>
+                <div class="face f3"></div>
+                <div class="face f4"></div>
+              </div>
+              <p>50+ Creative Minds</p>
+            </div>
+            <div class="about-floating-badge">
+              <span class="award-icon">🏆</span>
+              <div>
+                <strong>Top Rated Agency</strong>
+                <span>2023 · 2024 · 2025</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-accent-ring"></div>
+        </div>
+        <div class="about-content reveal-right">
+          <div class="section-tag">Who We Are</div>
+          <h2 class="section-title">We Turn <span class="gradient-text">Vision</span><br />Into Reality</h2>
+          <p class="section-desc">
+            NexaCode is a full-service digital agency founded by developers and designers who
+            believe that great software changes everything. We partner with startups, scale-ups,
+            and enterprises to build products that people actually love.
+          </p>
+          <div class="about-features">
+            <div class="feat-item">
+              <div class="feat-icon">🎯</div>
+              <div>
+                <strong>Strategy-First</strong>
+                <p>Every line of code serves a business goal.</p>
+              </div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-icon">⚡</div>
+              <div>
+                <strong>Blazing Fast Delivery</strong>
+                <p>Agile sprints with weekly demos and iterations.</p>
+              </div>
+            </div>
+            <div class="feat-item">
+              <div class="feat-icon">🔒</div>
+              <div>
+                <strong>Secure by Default</strong>
+                <p>Security reviews baked into every project phase.</p>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn-primary">Work With Us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SERVICES SECTION
+  ═══════════════════════════════════════ -->
+  <section class="services section-pad" id="services">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag">What We Do</div>
+        <h2 class="section-title">Our <span class="gradient-text">Services</span></h2>
+        <p class="section-desc">End-to-end digital solutions crafted with the latest technologies.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal-up" data-delay="0">
+          <div class="service-icon-wrap" style="--c1:#6366f1;--c2:#8b5cf6">
+            <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="3" stroke="white" stroke-width="2"/><path d="M10 16l4 4-4 4M18 24h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Web Development</h3>
+          <p>Pixel-perfect, high-performance websites using React, Next.js, Vue, and cutting-edge frontend frameworks.</p>
+          <ul class="service-tags">
+            <li>React / Next.js</li><li>Vue / Nuxt</li><li>Performance Optimized</li>
+          </ul>
+          <a href="#contact" class="service-link">Get Started →</a>
+          <div class="card-glow"></div>
+        </div>
+
+        <div class="service-card reveal-up" data-delay="100">
+          <div class="service-icon-wrap" style="--c1:#ec4899;--c2:#f43f5e">
+            <svg viewBox="0 0 40 40" fill="none"><rect x="10" y="4" width="20" height="32" rx="4" stroke="white" stroke-width="2"/><circle cx="20" cy="31" r="1.5" fill="white"/></svg>
+          </div>
+          <h3>Mobile Apps</h3>
+          <p>Native-quality iOS and Android apps with seamless UX, built using React Native and Flutter.</p>
+          <ul class="service-tags">
+            <li>React Native</li><li>Flutter</li><li>iOS & Android</li>
+          </ul>
+          <a href="#contact" class="service-link">Get Started →</a>
+          <div class="card-glow"></div>
+        </div>
+
+        <div class="service-card reveal-up" data-delay="200">
+          <div class="service-icon-wrap" style="--c1:#06b6d4;--c2:#3b82f6">
+            <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="white" stroke-width="2"/><path d="M8 20h24M20 6C14 12 14 28 20 34M20 6c6 6 6 22 0 28" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <h3>UI / UX Design</h3>
+          <p>Research-driven interfaces that balance aesthetics and usability, crafted in Figma with design systems.</p>
+          <ul class="service-tags">
+            <li>Figma</li><li>Design Systems</li><li>Prototyping</li>
+          </ul>
+          <a href="#contact" class="service-link">Get Started →</a>
+          <div class="card-glow"></div>
+        </div>
+
+        <div class="service-card reveal-up" data-delay="0">
+          <div class="service-icon-wrap" style="--c1:#f59e0b;--c2:#ef4444">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M20 6l3.5 7 7.5 1.1-5.4 5.3 1.3 7.5L20 23.5l-6.9 3.4 1.3-7.5L9 14.1l7.5-1.1z" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>AI Integration</h3>
+          <p>Smart automation, chatbots, recommendation engines, and data analytics powered by OpenAI and custom ML models.</p>
+          <ul class="service-tags">
+            <li>OpenAI / LLMs</li><li>ML Pipelines</li><li>Automation</li>
+          </ul>
+          <a href="#contact" class="service-link">Get Started →</a>
+          <div class="card-glow"></div>
+        </div>
+
+        <div class="service-card reveal-up" data-delay="100">
+          <div class="service-icon-wrap" style="--c1:#10b981;--c2:#059669">
+            <svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="12" rx="12" ry="5" stroke="white" stroke-width="2"/><path d="M8 12v16c0 2.8 5.4 5 12 5s12-2.2 12-5V12" stroke="white" stroke-width="2"/><path d="M8 20c0 2.8 5.4 5 12 5s12-2.2 12-5" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <h3>Cloud & DevOps</h3>
+          <p>Scalable infrastructure on AWS, GCP, and Azure with CI/CD pipelines, Kubernetes, and 99.9% uptime SLAs.</p>
+          <ul class="service-tags">
+            <li>AWS / Azure / GCP</li><li>Kubernetes</li><li>CI/CD</li>
+          </ul>
+          <a href="#contact" class="service-link">Get Started →</a>
+          <div class="card-glow"></div>
+        </div>
+
+        <div class="service-card reveal-up" data-delay="200">
+          <div class="service-icon-wrap" style="--c1:#a855f7;--c2:#7c3aed">
+            <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="10" height="10" rx="2" stroke="white" stroke-width="2"/><rect x="22" y="8" width="10" height="10" rx="2" stroke="white" stroke-width="2"/><rect x="8" y="22" width="10" height="10" rx="2" stroke="white" stroke-width="2"/><rect x="22" y="22" width="10" height="10" rx="2" stroke="white" stroke-width="2"/></svg>
+          </div>
+          <h3>E-Commerce</h3>
+          <p>End-to-end online stores with Shopify, custom headless builds, payments, and conversion optimisation.</p>
+          <ul class="service-tags">
+            <li>Shopify</li><li>WooCommerce</li><li>Headless</li>
+          </ul>
+          <a href="#contact" class="service-link">Get Started →</a>
+          <div class="card-glow"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       WORK / PORTFOLIO
+  ═══════════════════════════════════════ -->
+  <section class="work section-pad" id="work">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-title">Featured <span class="gradient-text">Work</span></h2>
+        <p class="section-desc">A selection of projects we're proud of.</p>
+      </div>
+      <div class="work-filter reveal-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="mobile">Mobile</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+      </div>
+      <div class="work-grid">
+
+        <div class="work-card big reveal-up" data-category="web">
+          <div class="work-card-img" style="--card-bg:linear-gradient(135deg,#667eea,#764ba2)">
+            <div class="work-browser">
+              <div class="wb-bar"><span></span><span></span><span></span></div>
+              <div class="wb-content">
+                <div class="wb-nav"></div>
+                <div class="wb-hero"></div>
+                <div class="wb-grid"><div></div><div></div><div></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">SaaS Platform</span>
+            <h3>FinTrack Dashboard</h3>
+            <p>Real-time financial analytics platform handling 2M+ transactions/day built on React & Node.js microservices.</p>
+            <div class="work-tags"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+          </div>
+        </div>
+
+        <div class="work-card reveal-up" data-category="mobile">
+          <div class="work-card-img" style="--card-bg:linear-gradient(135deg,#f093fb,#f5576c)">
+            <div class="work-phone">
+              <div class="wp-notch"></div>
+              <div class="wp-content">
+                <div class="wp-header"></div>
+                <div class="wp-card"></div>
+                <div class="wp-list"><div></div><div></div><div></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">Mobile App</span>
+            <h3>Wellify Health</h3>
+            <p>Award-winning health tracking app with 500K+ downloads on iOS & Android.</p>
+            <div class="work-tags"><span>React Native</span><span>Firebase</span></div>
+          </div>
+        </div>
+
+        <div class="work-card reveal-up" data-category="design">
+          <div class="work-card-img" style="--card-bg:linear-gradient(135deg,#4facfe,#00f2fe)">
+            <div class="work-design-preview">
+              <div class="dp-circle"></div>
+              <div class="dp-lines">
+                <div></div><div></div><div></div>
+              </div>
+              <div class="dp-btn"></div>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">Brand & UI Design</span>
+            <h3>Aero Travel</h3>
+            <p>Full brand identity and booking experience redesign, increasing conversions by 60%.</p>
+            <div class="work-tags"><span>Figma</span><span>Prototyping</span></div>
+          </div>
+        </div>
+
+        <div class="work-card reveal-up" data-category="web">
+          <div class="work-card-img" style="--card-bg:linear-gradient(135deg,#43e97b,#38f9d7)">
+            <div class="work-browser small">
+              <div class="wb-bar"><span></span><span></span><span></span></div>
+              <div class="wb-content">
+                <div class="wb-hero small"></div>
+                <div class="wb-grid"><div></div><div></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">E-Commerce</span>
+            <h3>GreenMart Store</h3>
+            <p>Headless Shopify + Next.js storefront with AI-powered product recommendations.</p>
+            <div class="work-tags"><span>Next.js</span><span>Shopify</span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="work-cta reveal-up">
+        <a href="#contact" class="btn-primary">See Full Portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROCESS SECTION
+  ═══════════════════════════════════════ -->
+  <section class="process section-pad">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag">How We Work</div>
+        <h2 class="section-title">Our <span class="gradient-text">Process</span></h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-line"></div>
+        <div class="process-step reveal-up" data-delay="0">
+          <div class="step-num">01</div>
+          <div class="step-icon">💡</div>
+          <h3>Discovery</h3>
+          <p>We dive deep into your goals, audience, and competition to form a winning strategy.</p>
+        </div>
+        <div class="process-step reveal-up" data-delay="150">
+          <div class="step-num">02</div>
+          <div class="step-icon">🎨</div>
+          <h3>Design</h3>
+          <p>Wireframes to polished UI, every screen is purposeful, beautiful, and brand-consistent.</p>
+        </div>
+        <div class="process-step reveal-up" data-delay="300">
+          <div class="step-num">03</div>
+          <div class="step-icon">⚙️</div>
+          <h3>Develop</h3>
+          <p>Clean, tested, scalable code with daily standups and weekly sprint reviews.</p>
+        </div>
+        <div class="process-step reveal-up" data-delay="450">
+          <div class="step-num">04</div>
+          <div class="step-icon">🚀</div>
+          <h3>Launch</h3>
+          <p>Zero-downtime deploy, full QA, performance audit, and post-launch monitoring.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════ -->
+  <section class="testimonials section-pad" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag">Client Love</div>
+        <h2 class="section-title">What They <span class="gradient-text">Say</span></h2>
+      </div>
+      <div class="testi-slider" id="testi-slider">
+        <div class="testi-track" id="testi-track">
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"NexaCode completely transformed our online presence. The new platform handles 10x our previous load and our conversion rate doubled in the first month after launch."</p>
+            <div class="testi-author">
+              <div class="testi-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">SP</div>
+              <div>
+                <strong>Sarah Parker</strong>
+                <span>CEO, Luminary SaaS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"The team's technical depth is unmatched. They flagged architecture issues before we even knew they existed, saving us months of rework. Exceptional quality."</p>
+            <div class="testi-author">
+              <div class="testi-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">DK</div>
+              <div>
+                <strong>David Kim</strong>
+                <span>CTO, NovaPay Fintech</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"We got a stunning mobile app in 10 weeks. The design feels native and our users love the experience. The whole engagement was smooth and professional."</p>
+            <div class="testi-author">
+              <div class="testi-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">AL</div>
+              <div>
+                <strong>Anika Lesh</strong>
+                <span>Founder, Wellness Co.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">"From strategy through launch, NexaCode was a true partner. They pushed back when our ideas weren't right, which is exactly what we needed. Five stars!"</p>
+            <div class="testi-author">
+              <div class="testi-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">MO</div>
+              <div>
+                <strong>Marcus Obi</strong>
+                <span>Product Lead, RetailEdge</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="testi-controls reveal-up">
+        <button class="testi-btn" id="testi-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="testi-dots" id="testi-dots">
+          <button class="testi-dot active"></button>
+          <button class="testi-dot"></button>
+          <button class="testi-dot"></button>
+          <button class="testi-dot"></button>
+        </div>
+        <button class="testi-btn" id="testi-next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PRICING TEASER
+  ═══════════════════════════════════════ -->
+  <section class="pricing section-pad">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag">Pricing</div>
+        <h2 class="section-title">Transparent <span class="gradient-text">Packages</span></h2>
+        <p class="section-desc">Simple, fixed-scope pricing. No surprises.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <div class="pricing-card reveal-up" data-delay="0">
+          <div class="pricing-header">
+            <span class="plan-name">Starter</span>
+            <div class="plan-price"><span class="currency">$</span>2,500</div>
+            <span class="plan-period">one-time</span>
+          </div>
+          <ul class="plan-features">
+            <li>✓ 5-page responsive website</li>
+            <li>✓ Custom UI design</li>
+            <li>✓ SEO setup</li>
+            <li>✓ CMS integration</li>
+            <li>✓ 30-day support</li>
+          </ul>
+          <a href="#contact" class="btn-ghost full">Get Started</a>
+        </div>
+
+        <div class="pricing-card featured reveal-up" data-delay="100">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-header">
+            <span class="plan-name">Growth</span>
+            <div class="plan-price"><span class="currency">$</span>7,500</div>
+            <span class="plan-period">one-time</span>
+          </div>
+          <ul class="plan-features">
+            <li>✓ Full custom web app</li>
+            <li>✓ UX research & design</li>
+            <li>✓ API development</li>
+            <li>✓ Cloud deployment</li>
+            <li>✓ 90-day support</li>
+            <li>✓ Analytics dashboard</li>
+          </ul>
+          <a href="#contact" class="btn-primary full">Get Started</a>
+        </div>
+
+        <div class="pricing-card reveal-up" data-delay="200">
+          <div class="pricing-header">
+            <span class="plan-name">Enterprise</span>
+            <div class="plan-price">Custom</div>
+            <span class="plan-period">let's talk</span>
+          </div>
+          <ul class="plan-features">
+            <li>✓ Dedicated team</li>
+            <li>✓ Full product lifecycle</li>
+            <li>✓ AI integration</li>
+            <li>✓ Multi-platform</li>
+            <li>✓ Priority support SLA</li>
+            <li>✓ Security auditing</li>
+          </ul>
+          <a href="#contact" class="btn-ghost full">Contact Us</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT SECTION
+  ═══════════════════════════════════════ -->
+  <section class="contact section-pad" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <div class="section-tag">Get In Touch</div>
+          <h2 class="section-title">Let's Build<br /><span class="gradient-text">Something Great</span></h2>
+          <p class="section-desc">Tell us about your project and we'll get back to you within 24 hours.</p>
+          <div class="contact-methods">
+            <div class="contact-item">
+              <div class="ci-icon">📧</div>
+              <div>
+                <strong>Email</strong>
+                <span>hello@nexacode.dev</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">📞</div>
+              <div>
+                <strong>Phone</strong>
+                <span>+1 (555) 123-4567</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-icon">📍</div>
+              <div>
+                <strong>Office</strong>
+                <span>San Francisco, CA - Remote Worldwide</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal-right">
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@company.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="service">Service Needed</label>
+              <select id="service" name="service">
+                <option value="">Select a service…</option>
+                <option>Web Development</option>
+                <option>Mobile App</option>
+                <option>UI/UX Design</option>
+                <option>AI Integration</option>
+                <option>Cloud & DevOps</option>
+                <option>E-Commerce</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="budget">Project Budget</label>
+              <select id="budget" name="budget">
+                <option value="">Select a range…</option>
+                <option>$1k – $5k</option>
+                <option>$5k – $15k</option>
+                <option>$15k – $50k</option>
+                <option>$50k+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Us About Your Project</label>
+              <textarea id="message" name="message" rows="4" placeholder="Describe your project, goals, timeline…" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary full submit-btn">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading" style="display:none">Sending…</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+            <div class="form-success" id="form-success" style="display:none">
+              ✅ Message sent! We'll reply within 24 hours.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo">
+            <span class="logo-icon">⬡</span>
+            <span class="logo-text">NexaCode</span>
+          </a>
+          <p>Building the web's next generation - one pixel and one commit at a time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Portfolio</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Web Development</a></li>
+            <li><a href="#services">Mobile Apps</a></li>
+            <li><a href="#services">UI/UX Design</a></li>
+            <li><a href="#services">AI Solutions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NexaCode. All rights reserved.</span>
+        <span>Made with ❤️ &amp; lots of coffee</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       BACK TO TOP
+  ═══════════════════════════════════════ -->
+  <button class="back-top" id="back-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
